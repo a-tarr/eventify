@@ -33,6 +33,21 @@ const Copyright = styled.div`
 `
 
 class App extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      displayTable: false,
+      barcodes: []
+    }
+  }
+
+  getCodesAndPins(codesAndPins) {
+    this.setState({
+      barcodes: codesAndPins,
+      displayTable: true
+    });
+  }
+
   render() {
     return (
       <MuiThemeProvider>
@@ -40,7 +55,7 @@ class App extends Component {
           <BoxContainer>
             <MainBox>
               <Header />
-              <Input />
+              <Input getCodesAndPins={this.getCodesAndPins}/>
             </MainBox>
           </BoxContainer>
           <Copyright>© Anthony Tarr - {new Date().getFullYear()}</Copyright>

@@ -10,7 +10,6 @@ const InputBox = styled.textarea`
   padding: 10px;
   min-width: 250px;
   min-height: 100px;
-  //box-shadow: inset 0 0 0 1px #707070;
   border-radius: 3px;
 `;
 
@@ -37,12 +36,18 @@ class Input extends Component {
   async handleClick(event) {
     this.setState({fetching: true});
     try {
-      var x = await getVouchers(this.state.value);
-    } catch (err)
+      var codesAndPins = await getVouchers(this.state.value);
+      this.passCodesAndPins(codesAndPins);
+    } 
+      catch (err)
     {
       this.setState({fetching: false}); 
     }
     this.setState({fetching: false}); 
+  }
+
+  passCodesAndPins(codesAndPins) {
+    this.props.getCodesAndPins(codesAndPins);
   }
 
   render() {
