@@ -22,7 +22,7 @@ export function getVouchers(links) {
 
 function getBarcodes(links) {
   return new Promise(resolve => {
-    axios.post('http://eventifyapi.azurewebsites.net/api/barcodes/codes',
+    axios.post('https://eventifyapi.azurewebsites.net/api/barcodes/codes',
     {
       "barcodes": links
     })
@@ -38,7 +38,7 @@ function getBarcodes(links) {
 
 function scrapeForPins(links) {
   return new Promise(resolve => {
-    axios.post('http://eventifyapi.azurewebsites.net/api/barcodes/pins',
+    axios.post('https://eventifyapi.azurewebsites.net/api/barcodes/pins',
     {
       "barcodes": links
     })
@@ -54,7 +54,7 @@ function scrapeForPins(links) {
 
 function getPins() {
   return new Promise(resolve => {
-    axios.get('http://eventifyapi.azurewebsites.net/api/ocr')
+    axios.get('https://eventifyapi.azurewebsites.net/api/ocr')
       .then(function (response) {
         resolve(response.data);
       })
