@@ -27,6 +27,7 @@ class Input extends Component {
 
     this.handleChange = this.handleChange.bind(this);
     this.handleClick = this.handleClick.bind(this);
+    this.isFetching = this.isFetching.bind(this);
   }
 
   handleChange(event) {
@@ -43,28 +44,29 @@ class Input extends Component {
     {
       this.setState({fetching: false}); 
     }
-    this.setState({fetching: false}); 
   }
 
   passCodesAndPins(codesAndPins) {
     this.props.getCodesAndPins(codesAndPins);
   }
 
-  render() {
-    let display = null;
+  isFetching() {
     if (!this.state.fetching) {
-      display =
+      return (
       <div>
         <InputBox placeholder="Paste your links here!" value={this.state.value} onChange={this.handleChange} />
         <br />
         <StyledButton primary onClick={this.handleClick} label="Get my vouchers" />
       </div>
-    } else {
-      display = <div className="spinner" />
-    }
+      )
+    } 
+    return <div className="spinner" />
+  }
+
+  render() {
     return (
       <div>
-        {display}
+        {this.isFetching()}
       </div>
     );
   }

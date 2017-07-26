@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
 import Header from './components/Header';
 import Input from './components/Input';
+import ResultTable from './components/ResultTable';
 import logo from './logo.svg';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import styled from 'styled-components';
+import RaisedButton from 'material-ui/RaisedButton';
 
 const AppContainer = styled.div`
   overflow: auto;
@@ -39,13 +41,30 @@ class App extends Component {
       displayTable: false,
       barcodes: []
     }
+
+    this.displayContent = this.displayContent.bind(this);
+    this.getCodesAndPins = this.getCodesAndPins.bind(this);
   }
 
   getCodesAndPins(codesAndPins) {
+    console.log(codesAndPins);
     this.setState({
-      barcodes: codesAndPins,
-      displayTable: true
+      displayTable: true,
+      barcodes: codesAndPins
     });
+  }
+
+  displayContent() {
+    if (this.state.displayTable) {
+      return (
+        <div>
+          <ResultTable codesAndPins={this.state.barcodes}/>
+          <RaisedButton primary onClick={() => this.setState({displayTable: false})} label="Enter more" />
+        </div>
+        )
+    } else {
+      return <Input getCodesAndPins={this.getCodesAndPins}/>
+    }
   }
 
   render() {
@@ -55,7 +74,7 @@ class App extends Component {
           <BoxContainer>
             <MainBox>
               <Header />
-              <Input getCodesAndPins={this.getCodesAndPins}/>
+              {this.displayContent()}
             </MainBox>
           </BoxContainer>
           <Copyright>© Anthony Tarr - {new Date().getFullYear()}</Copyright>

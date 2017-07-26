@@ -9,13 +9,14 @@ export function getVouchers(links) {
     let codes = await getBarcodes(splitLinks);
     let success = await scrapeForPins(splitLinks);
     let pins = await getPins();
-    let obj = {};
-    for (let i in codes) {
-      obj[i]['code'] = codes[i];
-      obj[i]['pin'] = pins[i];
+    let objList = [];
+    for (let i = 0; i < codes.length; i++) {
+      let obj = {};
+      obj['barcode'] = codes[i];
+      obj['pin'] = pins[i];
+      objList.push(obj);
     }
-    console.log(obj);
-    resolve();
+    resolve(objList);
   })
 }
 
