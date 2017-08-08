@@ -22,7 +22,7 @@ class ResultTable extends Component {
   render() {
     return (
       <EventifyTable>
-        <Table>
+        <Table selectable={false}>
           <TableHeader displaySelectAll={false} adjustForCheckbox={false}>
             <TableRow >
               <TableHeaderColumn>Barcode</TableHeaderColumn>
