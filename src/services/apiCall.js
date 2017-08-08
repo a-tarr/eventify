@@ -10,7 +10,7 @@ export async function getVouchers(links) {
 
 function getBarcodes(links) {
   return new Promise((resolve, reject) => {
-    axios.post('api/barcodes-and-pins/',
+    axios.post('https://eventifyapi.azurewebsites.net/api/barcodes-and-pins/',
     {
       "barcodes": links
     })
