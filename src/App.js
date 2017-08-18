@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import Header from './components/Header';
 import Input from './components/Input';
 import ResultTable from './components/ResultTable';
-import logo from './logo.svg';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import styled from 'styled-components';
 import RaisedButton from 'material-ui/RaisedButton';
