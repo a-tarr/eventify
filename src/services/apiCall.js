@@ -1,7 +1,6 @@
 import axios from 'axios';
 
 export async function getVouchers(links) {
-  let result = {};
   let splitLinks = links.split('\n');
 
   let codes = await getBarcodes(splitLinks);
