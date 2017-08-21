@@ -1,7 +1,9 @@
 {
-    "extends": "standard",
     "plugins": [
-        "standard",
-        "promise"
+        "react"
+    ],
+    "extends": [
+        "eslint:all",
+        "plugin:react/all"
     ]
 }

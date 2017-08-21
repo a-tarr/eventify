@@ -5,6 +5,7 @@ import ResultTable from './components/ResultTable';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import styled from 'styled-components';
 import RaisedButton from 'material-ui/RaisedButton';
+import Toolbar from './components/Toolbar';
 
 const AppContainer = styled.div`
   overflow: auto;
@@ -70,6 +71,7 @@ class App extends Component {
     return (
       <MuiThemeProvider>
         <AppContainer>
+          <Toolbar />
           <BoxContainer>
             <MainBox>
               <Header />
