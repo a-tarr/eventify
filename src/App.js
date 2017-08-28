@@ -7,6 +7,12 @@ import styled from 'styled-components';
 import RaisedButton from 'material-ui/RaisedButton';
 import Toolbar from './components/Toolbar';
 
+import { Provider } from 'react-redux';
+import { createStore } from 'redux';
+import rootReducer from './reducers';
+
+let store = createStore(rootReducer, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__());
+
 const AppContainer = styled.div`
   overflow: auto;
   background-color: #3e4245;
@@ -70,16 +76,18 @@ class App extends Component {
   render() {
     return (
       <MuiThemeProvider>
-        <AppContainer>
-          <Toolbar />
-          <BoxContainer>
-            <MainBox>
-              <Header />
-              {this.displayContent()}
-            </MainBox>
-          </BoxContainer>
-          <Copyright>© Anthony Tarr - {new Date().getFullYear()}</Copyright>
-        </AppContainer>
+        <Provider store={store}>
+          <AppContainer>
+            <Toolbar />
+            <BoxContainer>
+              <MainBox>
+                <Header />
+                {this.displayContent()}
+              </MainBox>
+            </BoxContainer>
+            <Copyright>© Anthony Tarr - {new Date().getFullYear()}</Copyright>
+          </AppContainer>
+        </Provider>
       </MuiThemeProvider>
     );
   }

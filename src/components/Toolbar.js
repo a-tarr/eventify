@@ -7,10 +7,12 @@ import Login from './Login';
 const ToolbarSection = styled.div`
   margin: 8px auto;
   max-width: 1024px;
+  background-color: #2a2c2d;
 `;
 
 const Actions = styled.div`
   float: right;
+  margin-right: 10px;
 `
 
 const LogoAndName = styled.div`
