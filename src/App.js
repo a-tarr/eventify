@@ -22,7 +22,6 @@ const AppContainer = styled.div`
 
 const MainBox = styled.div`
   position: relative;
-  overflow: hidden;
   margin: 50px 15px;
   padding: 20px;
   text-align: center;

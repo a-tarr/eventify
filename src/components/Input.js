@@ -53,11 +53,11 @@ class Input extends Component {
   isFetching() {
     if (!this.state.fetching) {
       return (
-      <div>
-        <InputBox placeholder="Paste your links here!" value={this.state.value} onChange={this.handleChange} />
-        <br />
-        <StyledButton primary onClick={this.handleClick} label="Get my vouchers" />
-      </div>
+        <div>
+          <InputBox placeholder="Paste your links here!" value={this.state.value} onChange={this.handleChange} />
+          <br />
+          <StyledButton primary onClick={this.handleClick} label="Get my vouchers" />
+        </div>
       )
     } 
     return <div className="spinner" />

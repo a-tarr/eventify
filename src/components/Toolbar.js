@@ -5,7 +5,7 @@ import Signup from './Signup';
 import Login from './Login';
 
 const ToolbarSection = styled.div`
-  margin: 8px auto;
+  margin: 15px auto;
   max-width: 1024px;
   background-color: #2a2c2d;
 `;

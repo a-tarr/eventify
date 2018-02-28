@@ -2,7 +2,7 @@ import axios from 'axios'
 
 export async function getVouchers (links) {
   let splitLinks = links.split('\n')
-
+  splitLinks = splitLinks.filter(link => link.length > 0).map(link => link.trim())
   let codes = await getBarcodes(splitLinks)
   return codes
 }
@@ -12,11 +12,9 @@ function getBarcodes (links) {
     axios.post('https://eventifyapi.azurewebsites.net/api/barcodes-and-pins/',
       {
         'barcodes': links
-      })
-      .then(function (response) {
+      }).then(function (response) {
         resolve(response.data)
-      })
-      .catch(function (error) {
+      }).catch(function (error) {
         console.log(error)
         reject(error)
       })
