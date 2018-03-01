@@ -49,12 +49,12 @@ class Toolbar extends Component {
           <Icon className="fa fa-ticket" aria-hidden="true"></Icon>
           {/* <Name>Eventify</Name> */}
         </LogoAndName>
-        <Actions>
+        {/* <Actions>
           <FlatButton primary onClick={() => this.setState({ loginOpen: true })} label="Login" />&nbsp;
           <FlatButton primary onClick={() => this.setState({ signUpOpen: true })} label="Sign-up" />
           <Signup open={this.state.signUpOpen}/>
           <Login open={this.state.loginOpen}/>
-        </Actions>
+        </Actions> */}
       </ToolbarSection>
     );
   }
