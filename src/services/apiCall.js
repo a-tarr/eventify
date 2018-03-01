@@ -20,3 +20,14 @@ function getBarcodes (links) {
       })
   })
 }
+
+export function ping() {
+  return new Promise((resolve, reject) => {
+    axios.get('https://eventifyapi.azurewebsites.net/')
+      .then(response => {
+        resolve()
+      }).catch(error => {
+        reject()
+      })
+  })
+}

@@ -6,7 +6,7 @@ import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import styled from 'styled-components';
 import RaisedButton from 'material-ui/RaisedButton';
 import Toolbar from './components/Toolbar';
-
+import { ping } from './services/apiCall';
 import { Provider } from 'react-redux';
 import { createStore } from 'redux';
 import rootReducer from './reducers';
@@ -49,6 +49,10 @@ class App extends Component {
 
     this.displayContent = this.displayContent.bind(this);
     this.getCodesAndPins = this.getCodesAndPins.bind(this);
+  }
+
+  componentDidMount() {
+    ping();
   }
 
   getCodesAndPins(codesAndPins) {
