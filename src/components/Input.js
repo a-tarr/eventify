@@ -2,32 +2,34 @@ import React, { Component } from 'react';
 import styled from 'styled-components';
 import { getVouchers } from '../services/apiCall';
 import RaisedButton from 'material-ui/RaisedButton';
+import { connect } from 'react-redux'
+import { fetchImmediateBarcodes, fetchImmediateBarcodesComplete, fetchBarcodesLoggedIn, fetchBarcodesLoggedInComplete } from '../actions';
 import './input.css';
+
+const Wrapper = styled.div`
+  ${'' /* display: flex; */}
+  ${'' /* align-items: center; */}
+  ${'' /* justify-content: space-between; */}
+`
 
 const InputBox = styled.textarea`
   resize: none;
   margin: 25px 10px 10px;
   padding: 10px;
   min-width: 250px;
-  min-height: 100px;
+  min-height: 250px;
   border-radius: 3px;
-`;
-
-const StyledButton = styled(RaisedButton)`
-
 `;
 
 class Input extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      value: '',
-      fetching: false
+      value: ''
     };
 
     this.handleChange = this.handleChange.bind(this);
     this.handleClick = this.handleClick.bind(this);
-    this.isFetching = this.isFetching.bind(this);
   }
 
   handleChange(event) {
@@ -35,29 +37,26 @@ class Input extends Component {
   }
 
   async handleClick(event) {
-    this.setState({fetching: true});
-    try {
-      var codesAndPins = await getVouchers(this.state.value);
-      this.passCodesAndPins(codesAndPins);
-    } 
-      catch (err)
-    {
-      this.setState({fetching: false}); 
+    let token;
+    if (this.props.token) {
+      token = this.props.token;
     }
-  }
-
-  passCodesAndPins(codesAndPins) {
-    this.props.getCodesAndPins(codesAndPins);
+    this.props.dispatch(fetchImmediateBarcodes());
+    const codesAndPins = await getVouchers(this.state.value, token);
+    this.props.dispatch(fetchImmediateBarcodesComplete(codesAndPins));
   }
 
   isFetching() {
-    if (!this.state.fetching) {
+    if (!this.props.fetching) {
       return (
-        <div>
-          <InputBox placeholder="Paste your links here!" value={this.state.value} onChange={this.handleChange} />
-          <br />
-          <StyledButton primary onClick={this.handleClick} label="Get my vouchers" />
-        </div>
+        <Wrapper>
+          <div>
+            <InputBox placeholder="Paste your links here!" value={this.state.value} onChange={this.handleChange} />
+          </div>
+          <div>
+            <RaisedButton primary onClick={this.handleClick} label="Get my vouchers" />
+          </div>
+        </Wrapper>
       )
     } 
     return <div className="spinner" />
@@ -72,4 +71,16 @@ class Input extends Component {
   }
 }
 
-export default Input;
+const mapStateToProps = state => {
+  return {
+    fetching: state.fetch.fetchingImmediate,
+    loggedIn: state.loggedIn.loggedIn,
+    token: state.loggedIn.currentUser
+  }
+}
+
+const connectedInput = connect(
+  mapStateToProps
+)(Input);
+
+export default connectedInput;
