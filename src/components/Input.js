@@ -37,24 +37,13 @@ class Input extends Component {
   }
 
   async handleClick(event) {
-    if (!this.props.loggedIn) {
-      this.props.dispatch(fetchImmediateBarcodes());
-      try {
-        const codesAndPins = await getVouchers(this.state.value);
-        this.props.dispatch(fetchImmediateBarcodesComplete(codesAndPins));
-      } catch (err) {
-        console.error('Fetch failed: ' + err)
-        this.props.dispatch(fetchImmediateBarcodesComplete([]));
-      }
-    } else {
-      this.props.dispatch(fetchBarcodesLoggedIn())
-      try {
-        const codesAndPins = await getVouchers(this.state.value, this.props.token);
-        this.props.dispatch(fetchBarcodesLoggedInComplete(codesAndPins));
-      } catch (err) {
-        this.props.dispatch(fetchBarcodesLoggedInComplete());
-      }
+    let token;
+    if (this.props.token) {
+      token = this.props.token;
     }
+    this.props.dispatch(fetchImmediateBarcodes());
+    const codesAndPins = await getVouchers(this.state.value, token);
+    this.props.dispatch(fetchImmediateBarcodesComplete(codesAndPins));
   }
 
   isFetching() {

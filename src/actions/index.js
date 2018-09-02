@@ -4,6 +4,8 @@ export const FETCH_BARCODES_LOGGED_IN = 'FETCH_BARCODES_LOGGED_IN';
 export const FETCH_BARCODES_LOGGED_IN_COMPLETE = 'FETCH_BARCODES_LOGGED_IN_COMPLETE';
 export const LOGGED_IN = 'LOGGED_IN';
 export const LOGGED_OUT = 'LOGGED_OUT';
+export const GET_BARCODE_LIST_COMPLETED = 'GET_BARCODE_LIST_COMPLETED';
+export const FETCH_BARCODE_LIST = 'FETCH_BARCODE_LIST';
 
 export function fetchImmediateBarcodes() {
   return { 
@@ -40,4 +42,18 @@ export function loggedIn(object) {
 
 export function loggedOut() {
   return { type: LOGGED_OUT };
+}
+
+export function getBarcodeListCompleted(barcodes) {
+  return { 
+    type: GET_BARCODE_LIST_COMPLETED,
+    payload: barcodes
+  }
+}
+
+export function fetchBarcodeList(isFetching) {
+  return {
+    type: FETCH_BARCODE_LIST,
+    payload: isFetching
+  }
 }

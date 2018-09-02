@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import Input from './Input';
 import { connect } from 'react-redux'
 import ResultTable from './ResultTable';
-import RaisedButton from 'material-ui/RaisedButton';
 import LoggedInMain from './LoggedInMain';
 
 class Main extends Component {
@@ -45,10 +44,6 @@ const mapStateToProps = state => {
     fetching: state.fetch.fetchingImmediate,
     barcodes: state.fetch.barcodes
   }
-}
-
-const mapDispatchToProps = dispatch => {
-
 }
 
 const connectedMain = connect(

@@ -12,10 +12,10 @@ export default function fetch(state = initialState, action) {
         fetchingImmediate: true
       })
     case actions.FETCH_IMMEDIATE_BARCODES_COMPLETE:
-      return Object.assign({}, state, {
+      return {...state,
         fetchingImmediate: false,
-        barcodes: action.payload
-      })
+        barcodes: action.barcodes
+      }
     default:
       return state;
   }
