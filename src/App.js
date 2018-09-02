@@ -1,12 +1,16 @@
 import React, { Component } from 'react';
 import Header from './components/Header';
-import Input from './components/Input';
 import ResultTable from './components/ResultTable';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import styled from 'styled-components';
 import RaisedButton from 'material-ui/RaisedButton';
 import Toolbar from './components/Toolbar';
-
+import Main from './components/Main';
+import {
+  BrowserRouter as Router,
+  Route,
+  Link
+} from 'react-router-dom';
 import { Provider } from 'react-redux';
 import { createStore } from 'redux';
 import rootReducer from './reducers';
@@ -30,7 +34,7 @@ const MainBox = styled.div`
 
 const BoxContainer = styled.div`
   margin: 0 auto;
-  max-width: 500px;
+  max-width: 1024px;
 `
 
 const Copyright = styled.div`
@@ -47,7 +51,7 @@ class App extends Component {
       barcodes: []
     }
 
-    this.displayContent = this.displayContent.bind(this);
+    //this.displayContent = this.displayContent.bind(this);
     this.getCodesAndPins = this.getCodesAndPins.bind(this);
   }
 
@@ -59,33 +63,21 @@ class App extends Component {
     });
   }
 
-  displayContent() {
-    if (this.state.displayTable) {
-      return (
-        <div>
-          <ResultTable codesAndPins={this.state.barcodes}/>
-          <RaisedButton primary onClick={() => this.setState({displayTable: false})} label="Enter more" />
-        </div>
-        )
-    } else {
-      return <Input getCodesAndPins={this.getCodesAndPins}/>
-    }
-  }
-
   render() {
     return (
       <MuiThemeProvider>
         <Provider store={store}>
-          <AppContainer>
-            <Toolbar />
-            <BoxContainer>
-              <MainBox>
-                <Header />
-                {this.displayContent()}
-              </MainBox>
-            </BoxContainer>
-            <Copyright>© Anthony Tarr - {new Date().getFullYear()}</Copyright>
-          </AppContainer>
+        <Router>
+            <AppContainer>
+              <Toolbar />
+              <BoxContainer>
+                <MainBox>
+                  <Route exact path='/' component={Main} />
+                </MainBox>
+              </BoxContainer>
+              <Copyright>© Anthony Tarr - {new Date().getFullYear()}</Copyright>
+            </AppContainer>
+        </Router>
         </Provider>
       </MuiThemeProvider>
     );

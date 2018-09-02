@@ -1,10 +1,43 @@
-export const SHOW_MODAL = 'SHOW_MODAL';
-export const HIDE_MODAL = 'HIDE_MODAL';
+export const FETCH_IMMEDIATE_BARCODES = 'FETCH_IMMEDIATE_BARCODES';
+export const FETCH_IMMEDIATE_BARCODES_COMPLETE = 'FETCH_IMMEDIATE_BARCODES_COMPLETE';
+export const FETCH_BARCODES_LOGGED_IN = 'FETCH_BARCODES_LOGGED_IN';
+export const FETCH_BARCODES_LOGGED_IN_COMPLETE = 'FETCH_BARCODES_LOGGED_IN_COMPLETE';
+export const LOGGED_IN = 'LOGGED_IN';
+export const LOGGED_OUT = 'LOGGED_OUT';
 
-export function showModal(modal) {
-  return { type: SHOW_MODAL, modal};
+export function fetchImmediateBarcodes() {
+  return { 
+    type: FETCH_IMMEDIATE_BARCODES
+  };
 }
 
-export function hideModal() {
-  return { type: HIDE_MODAL };
+export function fetchImmediateBarcodesComplete(barcodes) {
+  return { 
+    type: FETCH_IMMEDIATE_BARCODES_COMPLETE,
+    barcodes: barcodes
+  };
+}
+
+export function fetchBarcodesLoggedIn() {
+  return { 
+    type: FETCH_BARCODES_LOGGED_IN
+  };
+}
+
+export function fetchBarcodesLoggedInComplete(barcodes) {
+  return { 
+    type: FETCH_BARCODES_LOGGED_IN_COMPLETE,
+    barcodes: barcodes
+  };
+}
+
+export function loggedIn(object) {
+  return { 
+    type: LOGGED_IN,
+    user: object
+  };
+}
+
+export function loggedOut() {
+  return { type: LOGGED_OUT };
 }
