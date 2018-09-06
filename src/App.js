@@ -15,6 +15,7 @@ import {
 import { Provider } from 'react-redux';
 import { createStore } from 'redux';
 import rootReducer from './reducers';
+import socketIOClient from "socket.io-client";
 
 let store = createStore(rootReducer, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__());
 
@@ -58,6 +59,9 @@ class App extends Component {
 
   componentDidMount() {
     ping();
+    const { endpoint } = this.state;
+    const socket = socketIOClient(endpoint);
+    socket.on("FromAPI", data => console.log({ response: data }));
   }
 
   getCodesAndPins(codesAndPins) {

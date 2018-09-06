@@ -1,6 +1,7 @@
 import axios from 'axios'
 
 let url = 'https://eventify-api.azurewebsites.net'
+url = 'http://localhost:3001'
 
 export async function getVouchers(links, token = null) {
   let splitLinks = links.split('\n')
